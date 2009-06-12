@@ -1,5 +1,6 @@
 package de.blau.android;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -46,6 +47,8 @@ public class Map extends View {
 	private Node selectedNode;
 
 	private Way selectedWay;
+
+	private List<OsmElement> preselectedElements = new ArrayList<OsmElement>();
 
 	public Map(final Context context) {
 		super(context);
@@ -238,13 +241,7 @@ public class Map extends View {
 		Path path = new Path();
 		Paint paint = new Paint(paints.get(Paints.WAY));
 
-		//TODO: order by occurrences
-		//setColorByTag(way, paint);
-
 		paintWaySegments(nodes, path);
-
-		//DEBUG-Setting: Set a unique color for each way
-		//paint.setColor((int) Math.abs((way.getOsmId()) + 1199991) * 99991);
 
 		//draw way tolerance
 		if (pref.isToleranceVisible()
@@ -252,6 +249,11 @@ public class Map extends View {
 				&& isInEditZoomRange) {
 			canvas.drawPath(path, paints.get(Paints.WAY_TOLERANCE));
 		}
+		//draw preselected highlighting
+		if (preselectedElements.contains(way) && isInEditZoomRange) {
+			canvas.drawPath(path, paints.get(Paints.PRESELECTED));
+		}
+
 		//draw selectedWay highlighting
 		if (way == selectedWay && isInEditZoomRange) {
 			canvas.drawPath(path, paints.get(Paints.SELECTED_WAY));
@@ -345,4 +347,13 @@ public class Map extends View {
 	void setPaints(final Paints paints) {
 		this.paints = paints;
 	}
+
+	List<OsmElement> getPreselectedElements() {
+		return preselectedElements;
+	}
+
+	void setPreselectedElements(List<OsmElement> clickedNodesAndWays) {
+		this.preselectedElements = clickedNodesAndWays;
+	}
+
 }

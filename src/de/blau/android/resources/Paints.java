@@ -35,7 +35,9 @@ public class Paints {
 
 	public final static int GPS_ACCURACY = 11;
 
-	private final static int PAINT_COUNT = 12;
+	public final static int PRESELECTED = 12;
+
+	private final static int PAINT_COUNT = 13;
 
 	private final Paint[] paints;
 
@@ -106,6 +108,10 @@ public class Paints {
 		paint.setColor(resources.getColor(R.color.tertiary));
 		paints[SELECTED_WAY] = paint;
 
+		paint = new Paint(paints[SELECTED_WAY]);
+		paint.setColor(resources.getColor(R.color.preselected));
+		paints[PRESELECTED] = paint;
+
 		paint = new Paint();
 		paint.setColor(resources.getColor(R.color.ccc_ocher));
 		paint.setStyle(Style.FILL);
@@ -136,6 +142,7 @@ public class Paints {
 		paints[NODE].setStrokeWidth(newStrokeWidth * 1.5f);
 		paints[SELECTED_NODE].setStrokeWidth(newStrokeWidth * 2f);
 		paints[SELECTED_WAY].setStrokeWidth(newStrokeWidth * 2f);
+		paints[PRESELECTED].setStrokeWidth(newStrokeWidth * 2f);
 		paints[GPS_POS].setStrokeWidth(newStrokeWidth * 2f);
 	}
 

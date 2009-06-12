@@ -526,7 +526,8 @@ public class Main extends Activity {
 			if (size == 1) {
 				performTagEdit(clickedNodesAndWays.get(0));
 			} else if (size > 1) {
-				v.showContextMenu();
+				map.setPreselectedElements(clickedNodesAndWays);
+				//v.showContextMenu();
 			} /* else {} */// If no elements where touched, ignore
 		}
 
@@ -536,7 +537,8 @@ public class Main extends Activity {
 			if (size == 1) {
 				logic.performErase((Node) clickedNodesAndWays.get(0));
 			} else if (size > 1) {
-				v.showContextMenu();
+				//v.showContextMenu();
+				map.setPreselectedElements(clickedNodesAndWays);
 			} /* else {} */// If no elements where touched, ignore
 		}
 
